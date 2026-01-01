@@ -16,7 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "@mastra/core": "^1.0.0-beta.19",
-    "zod": "^4"
+    "@mastra/evals": "^1.0.0-beta.3",
+    "@mastra/libsql": "^1.0.0-beta.10",
+    "@mastra/loggers": "^1.0.0-beta.3",
+    "@mastra/memory": "^1.0.0-beta.10",
+    "@mastra/observability": "^1.0.0-beta.9",
+    "zod": "^4.3.4"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
