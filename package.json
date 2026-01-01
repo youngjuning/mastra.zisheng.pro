@@ -1,0 +1,18 @@
+{
+  "name": "Mastra 中文文档",
+  "version": "0.0.1",
+  "description": "Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。 ",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "dumi dev",
+    "build": "dumi build",
+    "prepare": "dumi setup"
+  },
+  "authors": [
+    "luozhu2021@gmail.com"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "dumi": "latest"
+  }
+}
