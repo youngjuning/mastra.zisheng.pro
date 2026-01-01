@@ -20,7 +20,7 @@ export default defineConfig({
 </div>`,
   },
   theme: {
-    '@c-primary': '#7aff78',
+    '@c-primary': '#2bd439',
   },
   publicPath: '/',
   // analytics: {

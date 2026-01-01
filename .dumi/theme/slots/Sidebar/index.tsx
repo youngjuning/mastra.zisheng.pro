@@ -1,6 +1,7 @@
 import { NavLink, useLocation, useRouteMeta, useSidebarData } from 'dumi';
 import Toc from 'dumi/theme-default/slots/Toc';
 import React, { type FC } from 'react';
+import Adsense from '../Adsense';
 import './index.less';
 
 const Sidebar: FC = () => {
