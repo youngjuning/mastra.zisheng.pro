@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "description": "Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。 ",
   "scripts": {
-    "mastra:dev": "mastra dev",
-    "mastra:build": "mastra build",
     "start": "npm run dev",
     "dev": "dumi dev",
     "build": "dumi build",
@@ -14,19 +12,7 @@
     "luozhu2021@gmail.com"
   ],
   "license": "MIT",
-  "dependencies": {
-    "@mastra/core": "^1.0.0-beta.19",
-    "@mastra/evals": "^1.0.0-beta.3",
-    "@mastra/libsql": "^1.0.0-beta.10",
-    "@mastra/loggers": "^1.0.0-beta.3",
-    "@mastra/memory": "^1.0.0-beta.10",
-    "@mastra/observability": "^1.0.0-beta.9",
-    "zod": "^4.3.4"
-  },
   "devDependencies": {
-    "@types/node": "^25.0.3",
-    "dumi": "latest",
-    "mastra": "^1.0.0-beta.12",
-    "typescript": "^5.9.3"
+    "dumi": "latest"
   }
 }
