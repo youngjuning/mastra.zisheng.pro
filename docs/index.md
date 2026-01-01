@@ -1,23 +1,23 @@
 ---
 title: Typescript AI 框架
-description: Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。 
+description: Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。
 keywords: [Mastra]
 hero:
   title: Mastra
-  description: Typescript AI 框架
+  description: 基于现代 TypeScript 技术栈构建智能体
   actions:
-    - text: Hello
-      link: /
-    - text: World
-      link: /
+    - text: 介绍
+      link: /introduction
+    - text: 开始
+      link: /getting-started
 features:
-  - title: Hello
-    emoji: 💎
-    description: Put hello description here
-  - title: World
+  - title: 构建&迭代
+    emoji: 🤖
+    description: Agents、Workflows、RAG、Memory、MPC、评估。Mastra 让你的想法快速实现
+  - title: 上线&测试
     emoji: 🌈
-    description: Put world description here
-  - title: '!'
+    description: 不断微调，直至你的智能体达到人类水平的准确率。
+  - title: '部署&扩展'
     emoji: 🚀
-    description: Put ! description here
+    description: 集成到你的框架或服务，比如 Next.js、Express、Hono 或者其他框架。
 ---
