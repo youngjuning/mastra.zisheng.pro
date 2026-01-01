@@ -8,9 +8,9 @@ export default defineConfig({
     logo: 'https://mastra.ai/favicon/new-brand/icon-192.png',
     prefersColor: { default: 'auto' },
     editLink:
-      'https://github.com/youngjuning/Mastra 中文文档/edit/main/{filename}',
+      'https://github.com/youngjuning/mastra.zisheng.pro/edit/main/{filename}',
     socialLinks: {
-      github: 'https://github.com/youngjuning/Mastra 中文文档'
+      github: 'https://github.com/youngjuning/mastra.zisheng.pro'
     },
     hd: { rules: [] },
     footer: `
@@ -27,7 +27,7 @@ export default defineConfig({
   // ga_v2: '',
   // },
   // sitemap: {
-  // hostname: 'https://Mastra 中文文档.zisheng.pro',
+  // hostname: 'https://mastra.zisheng.pro',
   // },
   hash: true,
   exportStatic: {},
