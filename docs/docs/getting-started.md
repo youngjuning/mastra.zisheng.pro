@@ -62,7 +62,9 @@ touch tsconfig.json
 }
 ```
 
-> Mastra 需要现代 `module` 和 `moduleResolution` 设置。使用 `CommonJS` 或 `node` 会导致解析错误。
+:::info
+Mastra 需要现代 `module` 和 `moduleResolution` 设置。使用 `CommonJS` 或 `node` 会导致解析错误。
+:::
 
 ### 3、创建 `.env` 文件：
 
