@@ -11,7 +11,11 @@ group:
 
 创建一个新的 Mastra 项目，或将 Mastra 与你喜欢的框架集成以开始构建。
 
-`npx create mastra` 命令式构建第一个智能体的最快方法。它会引导你完成设置并生成一个示例智能体，你可以立即在 [Studio](/docs/studio) 中运行和调整。当你准备好时，你随时可以将 Mastra 与你的框架或 UI 集成。
+`npm create mastra` 命令式构建第一个智能体的最快方法。它会引导你完成设置并生成一个示例智能体，你可以立即在 [Studio](/docs/studio) 中运行和调整。当你准备好时，你随时可以将 Mastra 与你的框架或 UI 集成。
+
+## 开始之前
+
+- 你需要一个模型提供商的 API 密钥。国内的同学建议使用硅基流动，它支持几乎所有的模型提供商。
 
 ## 手动安装
 
@@ -160,3 +164,15 @@ export const mastra = new Mastra({
 ```sh
 npm run dev
 ```
+
+## 脚手架安装
+
+你可以在机器上的任何位置运行 `npm create mastra@beta`，出现提示时，选择提供商并输入你的密钥。
+
+这将为你的项目创建一个新目录，其中 `src/mastra` 文件夹包含天气智能体示例和以下文件：
+
+- `index.ts`：Mastra 配置，包括 memory
+- `tools/weather-tool.ts`：获取给定位置天气的工具
+- `agents/weather-agent.ts`：带有使用该工具提示的天气代理
+
+> 你可以使用带有 `--no-example` [标志](https://mastra.ai/reference/v1/cli/create-mastra#cli-flags) 的 `create mastra` 命令来跳过天气智能体示例或者 `--template` 从特定[模版](https://mastra.ai/templates)开始。
