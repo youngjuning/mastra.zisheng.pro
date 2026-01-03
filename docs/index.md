@@ -6,10 +6,10 @@ hero:
   title: Mastra
   description: 基于现代 TypeScript 技术栈构建智能体
   actions:
-    - text: 介绍
-      link: /introduction
-    - text: 开始
-      link: /getting-started
+    - text: 文档
+      link: /docs
+    - text: 指南
+      link: /
 features:
   - title: 构建&迭代
     emoji: 🤖
