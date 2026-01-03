@@ -1,7 +1,7 @@
 ---
-order: 2
+order: 1
 title: 开始
-description: 'Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。 '
+description: 'Mastra 是一个全面的开源框架，旨在简化 AI 应用开发流程。'
 keywords: [Mastra, AI, Agents]
 toc: content
 group:
@@ -11,8 +11,152 @@ group:
 
 创建一个新的 Mastra 项目，或将 Mastra 与你喜欢的框架集成以开始构建。
 
-## 创建新项目
+`npx create mastra` 命令式构建第一个智能体的最快方法。它会引导你完成设置并生成一个示例智能体，你可以立即在 [Studio](/docs/studio) 中运行和调整。当你准备好时，你随时可以将 Mastra 与你的框架或 UI 集成。
 
-`npx create mastra` 命令式构建第一个智能体的最快方法。它会引导你完成设置并生成一个示例智能体，你可以立即在 [Studio](/getting-started/studio) 中运行和调整。当你准备好时，你随时可以将 Mastra 与你的框架或 UI 集成。
+## 手动安装
 
-[快速开始>>>](/guides/quickstart)
+如果你不想使用我们的自动 CLI 工具，可以按照以下指南自行设置项目。
+
+### 1、创建新项目并更改目录
+
+```sh
+mkdir my-first-agent && cd my-first-agent
+```
+
+初始化 TypeScript 项目并安装以下依赖项：
+
+```sh
+npm init -y
+npm install -D typescript @types/node mastra@beta
+npm install @mastra/core@beta zod@^4
+```
+
+在 `package.json` 文件中添加 `dev` 和 `build` 脚本。
+
+### 2、创建 `tsconfig.json` 文件：
+
+```
+touch tsconfig.json
+```
+
+添加以下配置：
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
+}
+```
+
+> Mastra 需要现代 `module` 和 `moduleResolution` 设置。使用 `CommonJS` 或 `node` 会导致解析错误。
+
+### 3、创建 `.env` 文件：
+
+```sh
+touch .env
+```
+
+添加您的 API 密钥：
+
+```sh
+SILICONFLOW_API_KEY=<your-api-key>
+```
+
+本指南使用硅基流动，它支持大部分世面上的模型。但你可以使用任何受支持的模型提供商，包括 OpenAI、Anthropic、Gemini 等。
+
+### 4、创建 `wether-tool.ts` 文件：
+
+```sh
+mkdir -p src/mastra/tools && touch src/mastra/tools/weather-tool.ts
+```
+
+添加以下代码：
+
+```ts
+import { createTool } from "@mastra/core/tools";
+import { z } from "zod";
+
+export const weatherTool = createTool({
+  id: "get-weather",
+  description: "获取一个位置的当前天气",
+  inputSchema: z.object({
+    location: z.string().describe("城市名"),
+  }),
+  outputSchema: z.object({
+    output: z.string(),
+  }),
+  execute: async () => {
+    return {
+      output: "当前是晴天",
+    }
+  }
+});
+```
+
+> 我们在此对 `weatherTool` 进行了简化，你可以在 [给智能体一个工具](/docs/agents-using-tools) 中查看完整的天气工具。
+
+### 5、创建 `weather-agent.ts`
+
+```sh
+mkdir -p src/mastra/agents && touch src/mastra/agents/weather-agent.ts
+```
+
+添加以下代码：
+
+```ts
+import { Agent } from "@mastra/core/agent";
+import { weatherTool } from "../tools/weather-tool";
+
+export const weatherAgent = new Agent({
+  id: "weather-agent",
+  name: "Weather Agent",
+  instructions: `
+    你是一位有用的天气助手，提供准确的天气信息。
+
+    你的主要功能是帮助用户获取特定位置的天气详细信息。回复时：
+      - 如果没有提供位置，请务必询问位置
+      - 如果地点名称不是英文，请翻译
+      - 如果提供包含多个部分的位置（例如“New York，NW”），请使用最相关的部分（例如“New York”）
+      - 包括湿度、风况和降水等相关详细信息
+      - 保持回答简洁但内容丰富
+
+    使用 weatherTool 获取当前天气数据。
+`,
+  model: "siliconflow-cn/Qwen/Qwen3-235B-A22B-Instruct-2507",
+  tools: { weatherTool },
+});
+
+```
+
+### 6、创建 Mastra 入口点并注册你的代理：
+
+```sh
+touch src/mastra/index.ts
+```
+
+添加以下代码：
+
+```ts
+import { Mastra } from "@mastra/core";
+import { weatherAgent } from "./agents/weather-agent";
+
+export const mastra = new Mastra({
+  agents: { weatherAgent },
+});
+```
+
+### 7、启动并测试你的代理
+
+```sh
+npm run dev
+```

@@ -13,7 +13,7 @@ hero:
 features:
   - title: 构建&迭代
     emoji: 🤖
-    description: Agents、Workflows、RAG、Memory、MPC、评估。Mastra 让你的想法快速实现
+    description: Agents、Workflows、RAG、Memory、MPC、评测。Mastra 让你的想法快速实现
   - title: 上线&测试
     emoji: 🌈
     description: 不断微调，直至你的智能体达到人类水平的准确率。
