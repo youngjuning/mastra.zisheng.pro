@@ -20,7 +20,7 @@ export const weatherAgent = new Agent({
 
       Use the weatherTool to fetch current weather data.
 `,
-  model: 'siliconflow-cn/Qwen/Qwen3-235B-A22B-Thinking-2507',
+  model: 'siliconflow-cn/Qwen/Qwen3-235B-A22B-Instruct-2507',
   defaultOptions: {
     toolChoice: 'auto',
   },
