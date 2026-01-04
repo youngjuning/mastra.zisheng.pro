@@ -8,8 +8,8 @@ hero:
   actions:
     - text: 文档
       link: /docs
-    - text: 指南
-      link: /
+    - text: 大模型
+      link: lm/text-generation
 features:
   - title: 构建&迭代
     emoji: 🤖
@@ -21,3 +21,8 @@ features:
     emoji: 🚀
     description: 集成到你的框架或服务，比如 Next.js、Express、Hono 或者其他框架。
 ---
+
+- [阿里云百炼文档](https://help.aliyun.com/zh/model-studio/what-is-model-studio)
+- [阿里云大模型高级工程师 ACP 认证](https://edu.aliyun.com/certification/acp26)
+- [Cursor 中文网站](https://docs.cursor.ac.cn/get-started/welcome)
+- [生成式 AI（JavaScript 实现）](https://github.com/microsoft/generative-ai-with-javascript)
