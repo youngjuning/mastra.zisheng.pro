@@ -2,17 +2,20 @@ import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 
 export const weatherTool = createTool({
-  id: "get-weather",
-  description: "获取一个位置的当前天气",
+  id: "weather-tool",
+  description: "Fetches weather for a location",
   inputSchema: z.object({
-    location: z.string().describe("城市名")
+    location: z.string(),
   }),
   outputSchema: z.object({
-    output: z.string(),
+    weather: z.string(),
   }),
-  execute: async () => {
-    return {
-      output: "当前是晴天",
-    }
-  }
-})
+  execute: async (inputData) => {
+    const { location } = inputData;
+
+    const response = await fetch(`https://wttr.in/${location}?format=3`);
+    const weather = await response.text();
+
+    return { weather };
+  },
+});

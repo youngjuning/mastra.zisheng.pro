@@ -9,6 +9,8 @@ group:
   order: 1
 ---
 
+# 开始
+
 创建一个新的 Mastra 项目，或将 Mastra 与你喜欢的框架集成以开始构建。
 
 `npm create mastra` 命令式构建第一个智能体的最快方法。它会引导你完成设置并生成一个示例智能体，你可以立即在 [Studio](/docs/studio) 中运行和调整。当你准备好时，你随时可以将 Mastra 与你的框架或 UI 集成。

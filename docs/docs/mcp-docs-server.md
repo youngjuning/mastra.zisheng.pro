@@ -9,6 +9,8 @@ group:
   order: 1
 ---
 
+# MCP 文档服务
+
 `@mastra/mcp-docs-server` 包提供通过模型上下文协议 (MCP)直接访问 Mastra 的完整知识库，包括文档、代码示例、博客文章和变更日志的功能。它可与 Cursor、Windsurf、Cline、Claude Code、Codex 或任何支持 MCP 的工具配合使用。
 
 这些工具旨在帮助智能体检索精确的、特定于任务的信息 - 无论你是向智能体添加功能、构建新项目还是探索某些内容的工作原理。
