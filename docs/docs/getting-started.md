@@ -138,7 +138,7 @@ export const weatherAgent = new Agent({
 
     使用 weatherTool 获取当前天气数据。
 `,
-  model: "siliconflow-cn/Qwen/Qwen3-235B-A22B-Instruct-2507",
+  model: "siliconflow-cn/Qwen/Qwen3-Coder-30B-A3B-Instruct",
   tools: { weatherTool },
 });
 

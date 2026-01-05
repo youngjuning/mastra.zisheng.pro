@@ -22,7 +22,7 @@ export const translationScorer = createScorer({
     'Checks that non-English location names are translated and used correctly',
   type: 'agent',
   judge: {
-    model: 'siliconflow-cn/Qwen/Qwen3-235B-A22B-Instruct-2507',
+    model: 'siliconflow-cn/Qwen/Qwen3-Coder-30B-A3B-Instruct',
     instructions:
       'You are an expert evaluator of translation quality for geographic locations. ' +
       'Determine whether the user text mentions a non-English location and whether the assistant correctly uses an English translation of that location. ' +

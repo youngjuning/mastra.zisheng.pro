@@ -4,7 +4,7 @@ export const testAgent = new Agent({
   id: "test-agent",
   name: "Test Agent",
   instructions: "You are a helpful assistant.",
-  model: "siliconflow-cn/Qwen/Qwen3-235B-A22B-Instruct-2507",
+  model: "siliconflow-cn/Qwen/Qwen3-Coder-30B-A3B-Instruct",
 });
 
 testAgent.stream([
