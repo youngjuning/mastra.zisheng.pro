@@ -50,3 +50,38 @@ export const weatherTool = createTool({
   },
 });
 ```
+
+## 向智能体添加工具
+
+要使用智能体可以使用工具，请将其添加到 `tools` 中。在智能体的系统提示中提及可用工具及其一般用途有助于代理决定何时调用工具以及何时不调用。
+
+通过将特定部分委托给各个工具，智能体可以使用多个工具来处理更复杂的任务。代理根据用户的消息、智能体的指令以及工具描述和 Schema 来决定使用哪些工具。
+
+```ts
+import { Agent } from "@mastra/core/agent";
+import { weatherTool } from "../tools/weather-tool";
+
+export const weatherAgent = new Agent({
+  id: "weather-agent",
+  name: "Weather Agent",
+  instructions: `
+    You are a helpful weather assistant.
+    Use the weatherTool to fetch current weather data.
+  `,
+  model: "siliconflow-cn/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  tools: { weatherTool }
+});
+```
+
+## 调用智能体
+
+智能体使用工具的 `inputSchema` 来推断该工具期望的数据。在本示例中，它从 `location` 消息中提取并将其传递给工具的 `inputData` 参数。
+
+```ts
+import { mastra } from "./mastra";
+import "dotenv/config";
+
+const agent = mastra.getAgent("weatherAgent");
+
+const result = await agent.generate("What's the weather in Lindon?");
+```
