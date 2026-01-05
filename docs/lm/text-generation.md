@@ -238,6 +238,11 @@ console.log(JSON.stringify(completion, null, 2));
     光影晃动间，整个房间都暖得像一声无声的呼噜。
     ```
 
+:::info{title="最佳实践"}
+- 💡 两者常配合使用，但一般只调一个即可（多数场景优先调 `temperature`）。
+- 📌 OpenAI、Anthropic、Google 等官方均建议：在 function calling / tool use 场景下，`temperature=0` 是最佳实践。
+:::
+
 ### temperature 原理
 
 - `temperature` 越高，Token 概率分布变得更平坦（即高概率 Token 的概率降低，低概率 Token 的概率上升），使得模型在选择下一个 Token 时更加随机。
@@ -428,4 +433,4 @@ console.log(JSON.stringify(completion, null, 2));
 const answer = completion.choices[0].message.content;
 ```
 
-——只要你不手动设置 n > 1，它就永远安全！
+——只要你不手动设置 `n > 1`，它就永远安全！
