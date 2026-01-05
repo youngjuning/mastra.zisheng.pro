@@ -85,3 +85,18 @@ const agent = mastra.getAgent("weatherAgent");
 
 const result = await agent.generate("What's the weather in Lindon?");
 ```
+
+## 使用多个工具
+
+当有多种工具可用时，智能体可以选择使用一种、多种或不使用，具体取决于回答查询所需的内容。
+
+```ts
+import { weatherTool } from "../tools/weather-tool";
+import { activitiesTool } from "../tools/activities-tool";
+
+export const weatherAgent = new Agent({
+  id: "weather-agent",
+  name: "Weather Agent",
+  tools: { weatherTool, activitiesTool },
+});
+```
