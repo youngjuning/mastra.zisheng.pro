@@ -100,3 +100,66 @@ export const weatherAgent = new Agent({
   tools: { weatherTool, activitiesTool },
 });
 ```
+
+## 将工作流作为工具使用
+
+工作流可以通过 `workflows` 配置添加到智能体重。添加工作流时，Mastra 会自动将其转换为智能体可调用的工具，生成的工具被命名为 `workflow-<workflowName>`，并采用工作流的 `inputSchema` 参数和 `outputSchema` 参数。
+
+```ts
+// src/mastra/agents/research-agent.ts
+import { Agent } from "@mastra/core/agent";
+import { researchWorkflow } from "../workflows/research-workflow";
+
+export const researchAgent = new Agent({
+  id: "research-agent",
+  name: "Research Agent",
+  instructions: `
+    You are a research assistant.
+    Use the research workflow to gather and compile information on
+    topics.
+  `,
+  model: "siliconflow-cn/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  tools: {
+    weatherTool,
+  },
+  workflows: {
+    researchWorkflow,
+  },
+});
+```
+
+工作流应包含一个说明，以帮助智能体理解何时使用它：
+
+```ts
+// src/mastra/workflows/research-workflow.ts
+import { createWorkflow } form "@mastra/core/workflows";
+import { z } from "zod";
+
+export const researchWorkflow = createWorkflow({
+  id: "research-workflow",
+  description: "Gathers information on a topic and compiles a summary report.",
+  inputSchema: z.object({
+    topic: z.string(),
+  }),
+  outputSchema: z.object({
+    summary: z.string(),
+    sources: z.array(z.string()),
+  }),
+})
+  .then(gatherSourceStep)
+  .then(compileReportStep)
+  .commit();
+;
+```
+
+当智能体调用一个工作流工具时，它会收到一个响应，响应内容包含工作流结果和一个可用于跟踪执行的 `runID`：
+
+```ts
+{
+  result: {
+    summary: "...",
+    sources: ["..."],
+  },
+  runId: "abc-123"
+}
+```
