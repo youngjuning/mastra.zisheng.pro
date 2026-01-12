@@ -3,9 +3,6 @@ order: 3
 title: OpenAI API
 description: '大语言模型是专门用于理解和生成人类语言的神经网络模型，它的输入和输出仅限于文本（token 序列）。 '
 keywords: [大语言模型, OpenAI, 大模型, AI, Agents]
-nav:
-  title: 大模型
-  order: 2
 toc: content
 ---
 
