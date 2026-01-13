@@ -231,4 +231,46 @@ const resultSchema = z.object({
   recommendations: z.array(z.string()).describe("List of recommendations"),
   confidence: z.number().min(0).max(1).describe("Confidence score")
 });
+
+const stream = await routingAgent.network("Research AI trends", {
+  structuredOutput: {
+    schema: resultScheme,
+  },
+})
+
+// Consume the stream
+for await (const chunk of stream) {
+  if (chunk.type === "network-object") {
+    // Partial object during generation
+    console.log("Partial:", chunk.payload.object);
+  }
+  if (chunk.type === "network-object-result") {
+    // Final structured object
+    console.log("Final:", chunk.payload.object);
+  }
+}
+
+// Get the typed result
+const result = await stream.object;
+console.log(result?.summary);
+console.log(result?.recommendations);
+console.log(result?.confidence);
+```
+
+### 流式输出部分对象
+
+对于结构化输出生成期间的实时更新，请使用 `objectStream`：
+
+```ts
+const stream = await routingAgent.network("Analyze market data", {
+  structuredOutput: { schema: resultSchema }
+});
+
+// Stream partial objects as they're generated
+for await (const partial of stream.objectStream) {
+  console.log("Building result:", partial);
+}
+
+// Get the final typed result
+const final = await stream.object;
 ```
