@@ -155,3 +155,46 @@ export const myAgent = new Agent({
   model: openai("gpt-4o-mini"),
 })
 ```
+
+### 模型路由
+
+能够无需学习多个提供商的 SDK，就快速测试和尝试不同的模型，这是非常有用的。这种做法被称为模型路由（model routing）。
+以下是一个使用 AI SDK 库的 JavaScript 示例：
+
+```ts
+import { openai } from "@ai-sdk/openai";
+import { Agent } from "mastra/core/agent";
+
+const agent = new Agent({
+  name: "weather-agent",
+  instructions: "Instructions for the agent...",
+  model: openai("gpt-4-turbo"), // Model comes directly from AI SDK
+});
+
+// Use the agent
+const result = await agent.generate("What is the weather like?");
+```
+
+### 结构化输出
+
+当你将 LLM 作为应用程序一部分时，通常希望它们以 JSON 格式返回数据，而不是无结构的文本。大多数模型支持“结构化输出”，以实现这一点。以下是通过提供 schema 来请求结构化响应的例子：
+
+```ts
+import { z } from "zod";
+
+const mySchema = z.object({
+  definition: z.string(),
+  examples: z.array(z.string()),
+});
+
+const response = await llm.generate(
+  "Define machine learning and give examples.",
+  output: mySchema,
+);
+
+console.log(response.object);
+```
+
+在处理非结构化或半结构化文本时，LLM 非常强大。例如，可以传递简历文本并提取职位、雇主和日期范围的列表，或者传递医疗记录并提取症状列表。
+
+### 工具调用
