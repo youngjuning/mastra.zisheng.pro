@@ -26,3 +26,7 @@ features:
 - [阿里云大模型高级工程师 ACP 认证](https://edu.aliyun.com/certification/acp26)
 - [Cursor 中文网站](https://docs.cursor.ac.cn/get-started/welcome)
 - [生成式 AI（JavaScript 实现）](https://github.com/microsoft/generative-ai-with-javascript)
+- [谷歌 Agent 设计模式中文版](https://github.com/xindoo/agentic-design-patterns)
+
+- [system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)：FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models
+- [prompts.chat](https://prompts.chat/)：AI 提示词的自由社交平台
