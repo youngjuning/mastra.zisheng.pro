@@ -23,9 +23,9 @@ export default defineConfig({
     '@c-primary': '#2bd439',
   },
   publicPath: '/',
-  // analytics: {
-  // ga_v2: '',
-  // },
+  analytics: {
+    ga_v2: 'G-XSL4QXVXDB',
+  },
   sitemap: {
     hostname: 'https://mastra.zisheng.pro',
   },
