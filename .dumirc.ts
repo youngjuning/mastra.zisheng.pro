@@ -26,9 +26,9 @@ export default defineConfig({
   // analytics: {
   // ga_v2: '',
   // },
-  // sitemap: {
-  // hostname: 'https://mastra.zisheng.pro',
-  // },
+  sitemap: {
+    hostname: 'https://mastra.zisheng.pro',
+  },
   hash: true,
   exportStatic: {},
   ...(process.env.NODE_ENV === 'development' ? {} : { ssr: {} }),
