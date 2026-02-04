@@ -39,6 +39,16 @@ npm install @mastra/core@beta zod@^4
 
 在 `package.json` 文件中添加 `dev` 和 `build` 脚本。
 
+```json
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "mastra dev",
+    "build": "mastra build"
+  }
+}
+```
+
 ### 2、创建 `tsconfig.json` 文件：
 
 ```
