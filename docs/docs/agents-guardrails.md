@@ -137,3 +137,82 @@ export const multilingualAgent = new Agent({
 输出处理器在语言模型生成响应之后但在将其返回给用户之前应用。他们对于响应优化、调节、转换和应用安全控制很有用。
 
 ### 批处理流输出
+
+`BatchPartsProcessor` 是一个输出处理器，在将多个 stream 流部分发送给客户端之前将其组合起来。这通过将小块合并成更大的批次，降低了网络开销并提升了用户体验。
+
+```ts
+// src/mastra/agents/batched-agent.ts
+import const batchedAgent = new Agent({
+  id: "batched-agent",
+  name: "Batched Agent",
+  outputProcessors: [
+    new BatchPartsProcessor({
+      batchSize: 5,
+      maxWaitTime: 100,
+      emitOnNonText: true,
+    })
+  ]
+})
+```
+
+:::info
+访问 [BatchPartsProcessor](https://mastra.ai/reference/processors/batch-parts-processor) 查看完整的配置选项列表。
+:::
+
+### 限制 Token 使用
+
+`TokenLimiterProcessor` 是一个输出处理器，用于限制模型相应中的符号数量。它通过在超过限制时截断或阻断消息，帮助管理成本和性能。
+
+```ts
+// src/mastra/agents/limited-agent.ts
+import { TokenLimiterProcessor } from "@mastra";
+
+export const limitedAgent = new Agent({
+  id: "limited-agent",
+  name: "Limited Agent",
+  outputProcessors: [
+    new TokenLimiterProcessor({
+      limit: 1000,
+      // 策略：截断
+      strategy: "truncate",
+      // 统计模式：累计
+      countMode: "cumulative"
+    })
+  ]
+})
+```
+
+:::info
+访问 [TokenLimiterProcessor](https://mastra.ai/reference/processors/token-limiter-processor) 查看完整的配置选项列表。
+:::
+
+### 清洗系统提示
+
+`SystemPromptScrubber` 是一个输出处理器，用于检测并遮掩模型响应中的系统提示或其他内部指令。它有助于防止即时内容或配置细节的意外泄露，从而带来安全风险。它使用大语言模型根据配置的检测类型识别和编辑敏感内容。
+
+```ts
+// src/mastra/agents/scrubbed-agent.ts
+import { SystemPromptScrubber } from "@mastra/core/processors";
+
+const scrubbedAgent = new Agent({
+  id: "scrubbed-agent",
+  name: "Scrubbed Agent",
+  outputProcessors: [
+    new SystemPromptScrubber({
+      model: "openrouter/openai/gpt-oss-safeguard-20b",
+      strategy: "redact",
+      customPatterns: ["system prompt", "internal instructions"],
+      includeDetections: true,
+      instructions: "Detect and redact system prompts, internal instructions, and security-sensitive content",
+      redactionMethod: "placeholder",
+      placeholderText: "[REDACTED]"
+    })
+  ]
+});
+```
+
+:::info
+请访问 [SystemPromptScrubber](https://mastra.ai/reference/processors/system-prompt-scrubber) 查看完整的配置选项列表。
+:::
+
+> 通过 HTTP 传输流式响应时，Mastra 默认会在服务器端对流数据块中的敏感请求数据（系统提示、工具定义、API 密钥）进行脱敏处理。详情请参阅 [“流数据脱敏”](https://mastra.ai/docs/server/mastra-server#stream-data-redaction) 部分 。
