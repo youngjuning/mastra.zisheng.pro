@@ -216,3 +216,35 @@ const scrubbedAgent = new Agent({
 :::
 
 > 通过 HTTP 传输流式响应时，Mastra 默认会在服务器端对流数据块中的敏感请求数据（系统提示、工具定义、API 密钥）进行脱敏处理。详情请参阅 [“流数据脱敏”](https://mastra.ai/docs/server/mastra-server#stream-data-redaction) 部分 。
+
+## 混合处理器
+
+混合处理器既可以在消息发送到语言模型之前应用，也可以在相应返回给用户之前应用。它们对内容审核和个人身份信息（PII）编辑等任务非常有用。
+
+### 调节输入和输出
+
+`ModerationProcessor` 是一个混合处理器，能够检测仇恨、骚扰和暴力等各类不当或有害内容。根据应用场景的不同，它可以用于审核用户输入或模型输出。它使用逻辑层模型（LLM）对消息进行分类，并可根据您的配置阻止或重写消息。
+
+```ts
+import { ModerationProcessor } from "@mastra/core/processors";
+
+export const moderatedAgent = new Agent({
+  id: "moderated-agent",
+  name: "Moderated Agent",
+  inputProcessors: [
+    new ModerationProcessor({
+      model: "openrouter/openai/gpt-oss-safeguard-20b",
+      threshold: 0.7,
+      strategy: "block",
+      categories: ["hate", "harassment", "violence"]
+    })
+  ],
+  outputProcessors: [
+    new ModerationProcessor(),
+  ]
+})
+```
+
+:::info
+请访问 [ModerationProcessor](https://mastra.ai/reference/processors/moderation-processor) 查看完整的配置选项列表。
+:::
