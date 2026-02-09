@@ -248,3 +248,35 @@ export const moderatedAgent = new Agent({
 :::info
 请访问 [ModerationProcessor](https://mastra.ai/reference/processors/moderation-processor) 查看完整的配置选项列表。
 :::
+
+### 检测和编辑个人身份信息
+
+`PIIDetector` 是一款混合处理器，能够检测并移除个人身份信息，例如电子邮件地址、电话号码和信用卡信息。根据应用场景的不同，它可以对用户输入或模型输出进行信息编辑。它使用 LLM 根据配置的检测类型来识别敏感信息。
+
+```ts
+// src/mastra/agents/private-agent.ts
+import { PIIDetector } from "@mastra/core/processors";
+
+export const privateAgent = new Agent({
+  id: "private-agent",
+  name: "Private Agent",
+  inputProcessors: [
+    new PIIDetector({
+      model: "openrouter/openai/gpt-oss-safeguard-20b",
+      threshold: 0.6,
+      strategy: "redact",
+      //
+      redactionMethod: "mask",
+      detectionTypes: ["email", "phone", "credit-card"],
+      instructions: "Detect and mask personally identifiable information."
+    }),
+  ],
+  outputProcessors: [
+    new PIIDetector(),
+  ]
+});
+```
+
+:::info
+请访问 [PIIDetector](https://mastra.ai/reference/processors/pii-detector) 查看完整的配置选项列表。
+:::
